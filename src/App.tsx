@@ -26,7 +26,7 @@ const App:React.FC = () => {
   }, [])
 
   return (
-    <div className="bg-white text-black dark:bg-gray-900 dark:text-white">
+    <div className="bg-background-DEFAULT text-text-DEFAULT dark:bg-background-dark dark:text-text-dark transition-colors duration-300">
       <div className="max-w-screen-xl mx-auto">
         <Router>
           <Header isScrolled={scroll} />
