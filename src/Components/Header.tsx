@@ -10,14 +10,18 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
   return (
     <div
-      className={`sticky top-4 left-0 right-0 w-full p-2 z-50 rounded-full border bg-white/50 dark:bg-gray-700/30 shadow-md ${
+      className={`sticky top-4 left-0 right-0 w-full p-2 z-50 rounded-full border dark:border-lines-dark border-lines-light
+        dark:bg-background-dark_extension bg-background-light_extension shadow-md ${
         isScrolled ? 'backdrop-blur-md' : 'backdrop-blur-none'
       }`}
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <img src={logo} alt="Logo" className="h-16 w-16 inline-block" />
-          <h1 className="text-3xl font-bold">Gloire Bulambo</h1>
+          <h1 className="hidden md:block text-4xl font-medium">
+            Gloire
+            <span className="text-text-light_extension dark:text-text-dark_extension ml-2">Bulambo</span>
+          </h1>
         </div>
         <div className="flex items-center space-x-16">
           <div className="">Navigation</div>

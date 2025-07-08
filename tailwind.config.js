@@ -6,10 +6,6 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    fontFamily: {
-      'Condensed': 'Avenir Next, sans-serif',
-      'Standard': 'Avenir Next standard, sans-serif'
-    },
     screens: {
       'xs': '375px',
       'sm': '640px',
@@ -18,10 +14,14 @@ export default {
       'xl': '1280px',
       '2xl': '1536px',
     },
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ['ui-sans-serif', 'system-ui', 'Helvetica Neue', 'Arial', 'sans-serif'],
+      },
+    },
     colors: {
       primary: {
-        DEFAULT: '#3B82F6',
+        DEFAULT: '#FDC401',
         light: '#3B82F6',
         dark: '#1E3A8A',
       },
@@ -31,12 +31,20 @@ export default {
         dark: '#B45309',
       },
       background: {
-        DEFAULT: '#FFFFFF',
+        light: '#FFFFFF',
+        light_extension: '#1010100d',
         dark: '#101010',
+        dark_extension: '#ffffff0d',
       },
       text: {
-        DEFAULT: '#111827',
+        light: '#111827',
+        light_extension: '#101010cc',
         dark: '#F3F4F6',
+        dark_extension: '#ffffffcc',
+      },
+      lines: {
+        light: '#1010101a',
+        dark: '#ffffff1a',
       },
     },
   },
