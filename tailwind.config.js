@@ -35,6 +35,7 @@ export default {
         light_extension: '#1010100d',
         dark: '#101010',
         dark_extension: '#ffffff0d',
+        transparent: 'transparent',
       },
       text: {
         light: '#111827',

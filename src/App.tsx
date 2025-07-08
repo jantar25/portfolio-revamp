@@ -5,6 +5,8 @@ import Header from './Components/Header';
 import Home from './pages/Home';
 import Work from './pages/Work';
 import Blog from './pages/Blog';
+import Contact from './pages/Contact';
+import NotFound from './pages/NotFound';
 import Footer from './Components/Footer';
 
 const App:React.FC = () => {
@@ -35,6 +37,8 @@ const App:React.FC = () => {
               <Route path="/" element={<Home />} />
               <Route path="/work" element={<Work />} />
               <Route path="/blog" element={<Blog />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </main>
           <Footer />
