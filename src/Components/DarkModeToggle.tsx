@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import { MdOutlineWbSunny } from "react-icons/md";
+import { IoMoonOutline } from "react-icons/io5";
 
 const DarkModeToggle: React.FC = () => {
     const [darkMode, setDarkMode] = useState<boolean>(() =>
@@ -18,9 +20,10 @@ const DarkModeToggle: React.FC = () => {
   return (
     <button
       onClick={() => setDarkMode(!darkMode)}
-      className="p-2 rounded bg-gray-200 dark:bg-gray-800"
+      className="w-[40px] h-[40px] rounded-full border dark:border-lines-dark border-lines-light flex items-center justify-center text-2xl
+        transition-all duration-300"
     >
-      {darkMode ? '☀️' : '🌙'}
+      {darkMode ? <MdOutlineWbSunny /> : <IoMoonOutline />}
     </button>
   )
 }

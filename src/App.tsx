@@ -27,16 +27,16 @@ const App:React.FC = () => {
 
   return (
     <div className="font-sans bg-background-light text-text-light dark:bg-background-dark dark:text-text-dark transition-colors duration-300">
-      <div className="max-w-screen-xl mx-auto">
+      <div className="px-4 md:px-8 xl:px-0 max-w-screen-xl mx-auto">
         <Router>
           <Header isScrolled={scroll} />
-          <div className="mt-20">
+          <main className="mt-20">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/work" element={<Work />} />
               <Route path="/blog" element={<Blog />} />
             </Routes>
-          </div>
+          </main>
           <Footer />
         </Router>
       </div>
