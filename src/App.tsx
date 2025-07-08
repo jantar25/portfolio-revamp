@@ -29,7 +29,7 @@ const App:React.FC = () => {
 
   return (
     <div className="font-sans bg-background-light text-text-light dark:bg-background-dark dark:text-text-dark transition-colors duration-300">
-      <div className="px-4 md:px-8 xl:px-0 max-w-screen-xl mx-auto">
+      <div className="px-4 md:px-8 max-w-screen-xl mx-auto">
         <Router>
           <Header isScrolled={scroll} />
           <main className="mt-20">

@@ -3,18 +3,13 @@ import { Link, NavLink } from 'react-router-dom';
 import { MdArrowOutward, MdOutlineMenu, MdClose, MdOutlineWbSunny } from "react-icons/md";
 import { IoMoonOutline } from "react-icons/io5";
 
+import { menuItems, socialLinks } from '../constant/dataLinks';
 import useDarkMode from '../hooks/useDarkMode';
 import logo from '../assets/images/logo.png'
 
 interface HeaderProps {
   isScrolled: boolean
 }
-
-const socialLinks : {name:string, url:string} [] = [
-  { name: 'LinkedIn', url: 'https://www.linkedin.com/in/bulambo-mwendelwa-gloire' },
-  { name: 'GitHub', url: 'https://github.com/jantar25'},
-  { name: 'Medium', url: 'https://bulambogloire.medium.com/'},
-];
 
 const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
   const [darkMode, toggleDarkMode] = useDarkMode();
@@ -35,26 +30,25 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
           </Link>
           <h1 className="hidden md:block text-3xl font-medium">
             Gloire
-            <span className="text-text-light_extension dark:text-text-dark_extension ml-2">Bulambo</span>
+            <span className="hidden lg:inline text-text-light_extension dark:text-text-dark_extension ml-2">Bulambo</span>
           </h1>
         </div>
         <div className="flex items-center gap-4">
           {!isMenuOpen && (
             <nav className="hidden sm:flex justify-between items-center border dark:border-lines-dark border-lines-light rounded-full p-1 shadow-md
             dark:bg-background-dark_extension bg-background-light_extension">
-              <ul className="flex item-center gap-4 text-md font-medium text-text-light_extension dark:text-text-dark_extension">
-                <NavLink to="/#about" className={({ isActive }) =>`px-6 py-3 rounded-full ${
-                  isActive ? activationClass : ''}`}>
-                  About
-                </NavLink>
-                <NavLink to="/work" className={({ isActive }) => `px-6 py-3 rounded-full ${
-                    isActive ? activationClass : ''
-                  }`
-                }>Work</NavLink>
-                <NavLink to="/blog" className={({ isActive }) => `px-6 py-3 rounded-full ${
-                    isActive ? activationClass : ''
-                  }`
-                }>Blog</NavLink>
+              <ul className="flex item-center gap-2 text-md font-medium text-text-light_extension dark:text-text-dark_extension">
+                {menuItems.map((item) => (
+                  <NavLink
+                    key={item.name}
+                    to={item.path}
+                    className={({ isActive }) => `px-6 py-3 rounded-full ${
+                      isActive ? activationClass : ''
+                    }`}
+                  >
+                    {item.name}
+                  </NavLink>
+                ))}
               </ul>
             </nav>
           )}
@@ -76,34 +70,35 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
             >
               {darkMode ? <MdOutlineWbSunny /> : <IoMoonOutline />}
             </button>
-            <div className="flex items-center gap-2">
-              <button className="flex items-center gap-1 text-xl font-medium hover:text-primary-default">
-                <span className="">Download CV</span>
-                <MdArrowOutward />
-              </button>
-              <Link to="contact" className="flex items-center gap-1 text-xl font-medium hover:text-primary-default">
-                <span className="">Contact Me</span>
-                <MdArrowOutward />
-              </Link>
-            </div>
+            <button className="flex items-center gap-1 text-xl font-medium hover:text-primary-default">
+              <span className="">Download CV</span>
+              <MdArrowOutward />
+            </button>
           </div>
         </div>
       </div>
       {isMenuOpen && (
-        <div className="xl:hidden mt-4 px-8 md:px-16">
-          <div className="flex flex-wrap items-start gap-8">
-            <div className="">
+        <div className="xl:hidden mt-8 px-4 md:px-16">
+          <div className="flex flex-wrap items-start gap-12">
+            <div className="flex-1">
               <h2 className="text-sm mb-4">Menu</h2>
               <nav className="">
                 <ul className="flex flex-col items-start justify-between text-xl md:text-2xl font-medium">
-                  <NavLink to="/#about" className={({ isActive }) => `${isActive ? "text-primary-default" : ''}`}>About</NavLink>
-                  <NavLink to="/work" className={({ isActive }) => `${isActive ? "text-primary-default" : ''}`}>Work</NavLink>
-                  <NavLink to="/blog" className={({ isActive }) => `${isActive ? "text-primary-default" : ''}`}>Blog</NavLink>
-                  <NavLink to="/contact" className={({ isActive }) => `${isActive ? "text-primary-default" : ''}`}>Contact Me</NavLink>
+                  {menuItems.map((item) => (
+                    <li key={item.name} className="mb-2">
+                      <NavLink
+                        to={item.path}
+                        className={({ isActive }) => `${isActive ? "text-primary-default" : ''
+                        }`}
+                      >
+                        {item.name}
+                      </NavLink>
+                    </li>
+                  ))}
                 </ul>
               </nav>
             </div>
-            <div className="">
+            <div className="flex-1">
               <h2 className="text-sm mb-4">Socials</h2>
               <nav className="">
                 <ul className="flex flex-col items-start text-xl md:text-2xl font-medium">
@@ -122,6 +117,25 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
                   ))}
                 </ul>
               </nav>
+            </div>
+            <div className="flex-1">
+              <h2 className="text-sm mb-4">Get in Touch</h2>
+              <div className="flex flex-col items-start gap-2">
+                <p className="text-xl md:text-2xl font-medium mb-2">
+                  <a href="mailto:glodybulambo@gmail.com" className="">
+                    glodybulambo@gmail.com
+                  </a>
+                </p>
+                <p className="text-xl md:text-2xl font-medium mb-2">
+                  <a href="tel:+250786120934" className="">
+                    +250 786 120 934
+                  </a>
+                </p>
+                <button className="flex items-center gap-1 text-2xl md:text-3xl font-medium text-primary-default">
+                  <span className="">Download CV</span>
+                  <MdArrowOutward />
+                </button>
+              </div>
             </div>
           </div>
           <hr className="border dark:border-lines-dark border-lines-light my-8" />
