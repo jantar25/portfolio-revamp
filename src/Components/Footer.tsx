@@ -5,7 +5,7 @@ import { socialLinks } from '../constant/dataLinks';
 
 const Footer: React.FC = () => {
   return (
-    <footer id='about'>
+    <footer>
       <div className="flex flex-col items-center md:items-start">
         <p className="text-xl md:text-4xl mb-4 text-text-light_extension dark:text-text-dark_extension">Connect with me</p>
         <div className="w-full flex flex-col 2xl:flex-row items-center justify-between md:items-start 2xl:items-center gap-8">

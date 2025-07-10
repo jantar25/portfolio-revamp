@@ -26,3 +26,12 @@
   border-radius: 12px;
   background-clip: content-box;
 }
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
