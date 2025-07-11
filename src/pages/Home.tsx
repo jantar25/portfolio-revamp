@@ -3,9 +3,11 @@ import { useLocation } from 'react-router-dom';
 
 import { dataSkills, languages, frameworksLabraries, tools } from '../constant/dataSkills'
 import { experiences } from '../constant/dataExperiences'
+import { ProjectData } from '../constant/dataWork'
 import { Slider } from '../Components/Slider'
 import SliderItem from '../Components/SliderItem'
 import ExperienceCard from '../Components/ExperienceCard';
+import ProjectCard from '../Components/ProjectCard'
 import BackgroundAnimation from '../Components/Annimations/BackgroundAnimation'
 import meImg from '../assets/images/me.png'
 
@@ -42,16 +44,15 @@ const location = useLocation();
           <BackgroundAnimation/>
         </div>
       </div>
-      <div className="mt-24">
-        <h2 className="text-4xl md:text-6xl font-bold mb-8" id="about">About Me</h2>
-        <div className="flex flex-col lg:flex-row items-stretch gap-8 mb-8">
+      <div className="mt-12 md:mt-24">
+        <h2 className="text-4xl md:text-6xl font-bold mb-4 md:mb-8" id="about">About Me</h2>
+        <div className="flex flex-col lg:flex-row items-stretch gap-8 mb-4 md:mb-8">
           <div className="flex-1">
             <h2 className="text-2xl md:text-4xl font-bold mb-2">
               Personal Snapshot
             </h2>
             <p className="text-sm md:text-md text-text-light_extension dark:text-text-dark_extension">
               I am a software engineer with a passion for building innovative solutions.
-              <br />
               I have experience in various programming languages and frameworks, and I love tackling complex challenges.
               In my free time, I enjoy contributing to open-source projects and exploring new technologies.
             </p>
@@ -101,23 +102,31 @@ const location = useLocation();
           </div>
         </div>
       </div>
-      <div className="flex flex-col lg:flex-row items-start justify-between gap-4 mt-24">
-        <h2 className="basis-1/3 text-4xl md:text-6xl font-medium mb-8">Relevant Experience</h2>
+      <div className="flex flex-col lg:flex-row items-start justify-between gap-4 mt-12 md:mt-24">
+        <h2 className="basis-1/3 text-4xl md:text-6xl font-medium mb-4 md:mb-8">Relevant Experience</h2>
         <div className="basis-2/3 flex flex-col gap-8">
           {experiences.map((experience) => (
             <ExperienceCard key={experience.id} {...experience} />
           ))}
         </div>
       </div>
-      <div className="flex flex-col lg:flex-row items-start justify-between gap-4 mt-24">
-        <h2 className="text-4xl md:text-6xl font-medium mb-8">Featured Works</h2>
+      <div className="flex flex-col gap-4 mt-12 md:mt-24">
+        <h2 className="text-4xl md:text-6xl font-medium mb-4 md:mb-8">Featured Works</h2>
+        <div className="flex flex-col gap-8">
+          {ProjectData.slice(0, 3).map((project) => 
+            <ProjectCard key={project.id} {...project} />
+          )}
+        </div>
+        <div className="flex items-center justify-center mt-8">
+        </div>
       </div>
-      <div className="flex flex-col lg:flex-row items-start justify-between gap-4 mt-24">
+      {/* <div className="flex flex-col lg:flex-row items-start justify-between gap-4 mt-24">
         <h2 className="text-4xl md:text-6xl font-medium mb-8">Personal Insights</h2>
       </div>
       <div className="flex flex-col lg:flex-row items-start justify-between gap-4 mt-24">
-        <h2 className="text-4xl md:text-6xl font-medium mb-8">Testimonial</h2>
-      </div>
+        <h2 className="
+        text-4xl md:text-6xl font-medium mb-8">Testimonial</h2>
+      </div> */}
     </div>
   )
 }
