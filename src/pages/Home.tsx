@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { MdArrowOutward } from "react-icons/md";
 
 import { dataSkills, languages, frameworksLabraries, tools } from '../constant/dataSkills'
 import { experiences } from '../constant/dataExperiences'
@@ -9,6 +10,7 @@ import SliderItem from '../Components/SliderItem'
 import ExperienceCard from '../Components/ExperienceCard';
 import ProjectCard from '../Components/ProjectCard'
 import BackgroundAnimation from '../Components/Annimations/BackgroundAnimation'
+import GetConnected from '../Components/GetConnected';
 import meImg from '../assets/images/me.png'
 
 const Home: React.FC = () => {
@@ -111,7 +113,13 @@ const location = useLocation();
         </div>
       </div>
       <div className="flex flex-col gap-4 mt-12 md:mt-24">
-        <h2 className="text-4xl md:text-6xl font-medium mb-4 md:mb-8">Featured Works</h2>
+        <div className="flex flex-col md:flex-row md:items-center justify-between mb-4 md:mb-8">
+          <h2 className="text-4xl md:text-6xl font-medium mb-4 md:mb-8">Featured Works</h2>
+          <Link to='/work' className="flex items-center gap-1 text-sm md:text-xl font-medium hover:text-primary-default">
+            View All Projects
+            <MdArrowOutward />
+          </Link>
+        </div>
         <div className="flex flex-col gap-8">
           {ProjectData.slice(0, 3).map((project) => 
             <ProjectCard key={project.id} {...project} />
@@ -127,6 +135,7 @@ const location = useLocation();
         <h2 className="
         text-4xl md:text-6xl font-medium mb-8">Testimonial</h2>
       </div> */}
+      <GetConnected />
     </div>
   )
 }
