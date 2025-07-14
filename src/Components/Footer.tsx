@@ -21,10 +21,15 @@ const Footer: React.FC = () => {
               </a>
             </p>
           </div>
-          <button className="flex items-center gap-1 text-2xl md:text-3xl lg:text-5xl font-medium text-primary-default">
+          <a
+            href="https://docs.google.com/document/d/1mXQ-S5y_iguZ4-uz6JzCLx9_tMcyCNIxlMS1ZAA1SEg"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1 text-2xl md:text-3xl font-medium text-primary-default"
+          >
             <span className="">Download CV</span>
             <MdArrowOutward />
-          </button>
+          </a>
         </div>
       </div>
       <hr className="border dark:border-lines-dark border-lines-light my-8 lg:my-16" />

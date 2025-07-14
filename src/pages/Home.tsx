@@ -105,8 +105,8 @@ const location = useLocation();
         </div>
       </div>
       <div className="flex flex-col lg:flex-row items-start justify-between gap-4 mt-12 md:mt-24">
-        <h2 className="basis-1/3 text-4xl md:text-6xl font-medium mb-4 md:mb-8">Relevant Experience</h2>
-        <div className="basis-2/3 flex flex-col gap-8">
+        <h2 className="w-full lg:basis-1/3 text-4xl md:text-6xl font-medium mb-4 md:mb-8">Relevant Experience</h2>
+        <div className="w-full lg:basis-2/3 flex flex-col gap-8">
           {experiences.map((experience) => (
             <ExperienceCard key={experience.id} {...experience} />
           ))}

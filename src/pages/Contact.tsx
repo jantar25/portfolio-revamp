@@ -2,6 +2,7 @@ import React, { useState, useRef  } from 'react'
 import emailjs from '@emailjs/browser';
 import { IoIosSend } from "react-icons/io";
 
+import { emailServiceId, emailTemplateId, emailPublicKey } from '../Utils/Formatting/Constants'
 import { validateEmail, validateName } from '../Utils/Validations/FieldsValidations';
 import { useNotificationHelpers } from "../Components/NotificationProvider";
 import ReusableInputs from '../Utils/Fields/ReusableInputs'
@@ -97,8 +98,8 @@ const Contact: React.FC = () => {
 
     setIsFetching(true)
     try {
-      const response = await emailjs.sendForm('service_o27xpzc', 'template_rvwz16m', formRef.current, {
-        publicKey: 'user_p6Z8erkcnfbXKsrc63eXs',
+      const response = await emailjs.sendForm(emailServiceId, emailTemplateId, formRef.current, {
+        publicKey: emailPublicKey,
       })
       if (response.status === 200) {
         success('Your message has been sent successfully.', {

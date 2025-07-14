@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { NotificationProvider } from './Components/NotificationProvider';
 
+import ScrollToTop from './Components/ScrollToTop';
 import Header from './Components/Header';
 import Home from './pages/Home';
 import Work from './pages/Work';
@@ -33,8 +34,9 @@ const App:React.FC = () => {
       <div className="px-4 md:px-8 max-w-screen-1/2xl mx-auto">
         <NotificationProvider position="top-right">
           <Router>
+            <ScrollToTop />
             <Header isScrolled={scroll} />
-            <main className="mt-20">
+            <main className="mt-20 md:mb-32">
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/work" element={<Work />} />
