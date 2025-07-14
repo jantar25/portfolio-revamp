@@ -70,10 +70,15 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
             >
               {darkMode ? <MdOutlineWbSunny /> : <IoMoonOutline />}
             </button>
-            <button className="flex items-center gap-1 text-xl font-medium hover:text-primary-default">
+            <a
+              href="https://docs.google.com/document/d/1mXQ-S5y_iguZ4-uz6JzCLx9_tMcyCNIxlMS1ZAA1SEg"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1 text-2xl md:text-3xl font-medium text-primary-default"
+            >
               <span className="">Download CV</span>
               <MdArrowOutward />
-            </button>
+            </a>
           </div>
         </div>
       </div>
@@ -88,6 +93,7 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
                     <li key={item.name} className="mb-2">
                       <NavLink
                         to={item.path}
+                        onClick={() => setIsMenuOpen(false)}
                         className={({ isActive }) => `${isActive ? "text-primary-default" : ''
                         }`}
                       >
@@ -131,10 +137,15 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
                     +250 786 120 934
                   </a>
                 </p>
-                <button className="flex items-center gap-1 text-2xl md:text-3xl font-medium text-primary-default">
+                <a
+                  href="https://docs.google.com/document/d/1mXQ-S5y_iguZ4-uz6JzCLx9_tMcyCNIxlMS1ZAA1SEg"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1 text-2xl md:text-3xl font-medium text-primary-default"
+                >
                   <span className="">Download CV</span>
                   <MdArrowOutward />
-                </button>
+                </a>
               </div>
             </div>
           </div>

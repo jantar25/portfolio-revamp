@@ -12,6 +12,7 @@ export default {
       'md': '768px',
       'lg': '1050px',
       'xl': '1280px',
+      '1/2xl': '1350px',
       '2xl': '1536px',
     },
     extend: {
@@ -22,8 +23,12 @@ export default {
     colors: {
       primary: {
         default: '#FDC401',
-        light: '#3B82F6',
-        dark: '#1E3A8A',
+        error: '#DC3C22',
+        success: '#22C55E',
+        warning: '#F59E0B',
+        info: '#3B82F6',
+      },
+      secondary: {
       },
       secondary: {
         DEFAULT: '#F59E0B',

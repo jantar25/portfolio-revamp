@@ -8,5 +8,5 @@ export const menuItems: {name:string, path:string} [] = [
   { name: 'About', path: '/#about' },
   { name: 'Work', path: '/work' },
   { name: 'Blog', path: '/blog' },
-  { name: 'Contact Me', path: '/contact'},
+  { name: 'Contact', path: '/contact'},
 ];
