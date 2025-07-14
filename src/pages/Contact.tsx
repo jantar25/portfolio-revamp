@@ -16,13 +16,13 @@ const Contact: React.FC = () => {
   const [isFetching, setIsFetching] = useState(false)
   const [validationErrors, setValidationErrors] = useState<Record<string, string>>({})
   const [inputs, setInputs] = useState({
-    firstName: '',
-    lastName: '',
+    names: '',
     email: '',
+    subject: '',
     message: ''
   })
 
-  const textArray = ['firstName', 'lastName', 'message']
+  const textArray = ['names', 'subject', 'message']
   const isAnyError = Object.keys(validationErrors).some(
     (key) => validationErrors[key],
   )
@@ -31,13 +31,13 @@ const Contact: React.FC = () => {
 
   const handleChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
-    if (value.length >= 60) return
+    if (value.length >= 100) return
     setInputs(prev => ({ ...prev, [name]: value }))
   }
 
   const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
-    if (value.length >= 100) return
+    if (value.length >= 140) return
     setInputs(prev => ({ ...prev, [name]: value }))
   }
 
@@ -50,8 +50,8 @@ const Contact: React.FC = () => {
   const validateNameFields = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
     let fieldName = ''
-    if (name === 'firstName') fieldName = 'First Name'
-    else if (name === 'lastName') fieldName = 'Last Name'
+    if (name === 'names') fieldName = 'Names'
+    else if (name === 'subject') fieldName = 'Subject'
     else if (name === 'message') fieldName = 'Message'
 
     validateName({
@@ -106,9 +106,9 @@ const Contact: React.FC = () => {
           title: 'Message Sent',
         });
         setInputs({
-          firstName: '',
-          lastName: '',
+          names: '',
           email: '',
+          subject: '',
           message: ''
         })
       } else {
@@ -139,37 +139,37 @@ const Contact: React.FC = () => {
           <div className="w-full flex flex-col md:flex-row gap-4">
             <ReusableInputs
               id={id}
-              label="First Name"
+              label="Names"
               type="text"
-              name="firstName"
-              value={inputs.firstName}
-              placeholder="Enter your First Name"
+              name="names"
+              value={inputs.names}
+              placeholder="Enter your Names"
               validationErrors={validationErrors}
               onBlur={validateNameFields}
               handleChange={handleChangeName}
             />
             <ReusableInputs
               id={id}
-              label="Last Name"
-              type="text"
-              name="lastName"
-              value={inputs.lastName}
-              placeholder="Enter your Last Name"
+              label="Email"
+              type="email"
+              name="email"
+              value={inputs.email}
+              placeholder="Enter your Email"
               validationErrors={validationErrors}
-              onBlur={validateNameFields}
-              handleChange={handleChangeName}
+              onBlur={validateEmailField}
+              handleChange={handleChangeEmail}
             />
           </div>
           <ReusableInputs
             id={id}
-            label="Email"
-            type="email"
-            name="email"
-            value={inputs.email}
-            placeholder="Enter your Email"
+            label="Subject"
+            type="text"
+            name="subject"
+            value={inputs.subject}
+            placeholder="Enter your Subject"
             validationErrors={validationErrors}
-            onBlur={validateEmailField}
-            handleChange={handleChangeEmail}
+            onBlur={validateNameFields}
+            handleChange={handleChangeName}
           />
           <ReusableTextArea
             id={id}
