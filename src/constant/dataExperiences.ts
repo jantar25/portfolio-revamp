@@ -30,10 +30,11 @@ export const experiences: Experience[] = [
     },
     {
         id: 2,
-        title: "Software Engineer",
+        title: "Team Leader",
         company: "SunCulture",
         duration: "January 2025 - May 2025",
         description: [
+          "Leading a team of 5 developers in building a web data experience platform.",
           "Collaborating with cross-functional teams to design and implement new features.",
           "Developing and maintaining scalable web applications using React and Node.js.",
           "Optimizing application performance and ensuring high availability.",

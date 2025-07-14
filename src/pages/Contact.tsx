@@ -1,14 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, useRef  } from 'react'
+import emailjs from '@emailjs/browser';
 import { IoIosSend } from "react-icons/io";
 
+import { validateEmail, validateName } from '../Utils/Validations/FieldsValidations';
+import { useNotificationHelpers } from "../Components/NotificationProvider";
 import ReusableInputs from '../Utils/Fields/ReusableInputs'
 import ReusableTextArea from '../Utils/Fields/ReusableTextArea'
 import Spinner from '../Components/Spinner'
 
 const Contact: React.FC = () => {
   const id = 'contact-form'
+  const { success, error } = useNotificationHelpers();
+  const formRef = useRef<HTMLFormElement | null>(null)
   const [isFetching, setIsFetching] = useState(false)
-  const [isAnyError, setIsAnyError] = useState(false)
   const [validationErrors, setValidationErrors] = useState<Record<string, string>>({})
   const [inputs, setInputs] = useState({
     firstName: '',
@@ -17,26 +21,107 @@ const Contact: React.FC = () => {
     message: ''
   })
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const textArray = ['firstName', 'lastName', 'message']
+  const isAnyError = Object.keys(validationErrors).some(
+    (key) => validationErrors[key],
+  )
+  const isAnyFieldEmpty = Object.keys(inputs)
+    .some((key) => !inputs[key as keyof typeof inputs])
+
+  const handleChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
+    if (value.length >= 60) return
     setInputs(prev => ({ ...prev, [name]: value }))
-    setValidationErrors(prev => ({ ...prev, [`${name}_${id}`]: '' }))
+  }
+
+  const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target
+    if (value.length >= 100) return
+    setInputs(prev => ({ ...prev, [name]: value }))
+  }
+
+  const handleChangeTextArea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    if (value.length >= 1000) return
+    setInputs(prev => ({ ...prev, [name]: value }))
+  }
+
+  const validateNameFields = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    let fieldName = ''
+    if (name === 'firstName') fieldName = 'First Name'
+    else if (name === 'lastName') fieldName = 'Last Name'
+    else if (name === 'message') fieldName = 'Message'
+
+    validateName({
+      id,
+      value,
+      fieldName,
+      setValidationErrors
+    })
+  }
+
+  const validateEmailField = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target
+    validateEmail({
+      id,
+      value,
+      fieldName: 'Email',
+      setValidationErrors
+    })
   }
 
   const sendMessage = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    setValidationErrors({})
+    if (!formRef.current) return;
+
+    Object.entries(inputs).forEach(([key, value]) => {
+      const fakeEvent = {
+        target: { name: key, value: value ?? '' },
+      } as React.ChangeEvent<HTMLInputElement>
+
+      if (textArray.includes(key)) {
+        validateNameFields(fakeEvent)
+      } else {
+        validateEmailField(fakeEvent)
+      } 
+    })
+
+    if (isAnyError || isAnyFieldEmpty) {
+      error('Please correct the errors and fill in all required fields.', {
+        title: 'Validation Error',
+      });
+      return;
+    }
+
     setIsFetching(true)
-    setIsAnyError(false)
-    setTimeout(() => {
-      setInputs({
-        firstName: '',
-        lastName: '',
-        email: '',
-        message: ''
+    try {
+      const response = await emailjs.sendForm('service_o27xpzc', 'template_rvwz16m', formRef.current, {
+        publicKey: 'user_p6Z8erkcnfbXKsrc63eXs',
       })
+      if (response.status === 200) {
+        success('Your message has been sent successfully.', {
+          title: 'Message Sent',
+        });
+        setInputs({
+          firstName: '',
+          lastName: '',
+          email: '',
+          message: ''
+        })
+      } else {
+        error('There was an issue sending your message. Please try again later.', {
+          title: 'Message Failed',
+        });
+      }
+    } catch (err) {
+      error('There was an issue sending your message. Please try again later.', {
+        title: 'Message Failed',
+      });
+    } finally {
       setIsFetching(false)
-      alert('Message sent successfully!')
-    }, 2000)
+    }
   }
 
   return (
@@ -49,7 +134,7 @@ const Contact: React.FC = () => {
           If you have any questions, feedback, or just want to say hello, feel free to reach out!
         </p>
       </div>
-        <form className="flex flex-col items-center w-full space-y-3 md:space-y-4 mb-12 lg:mb-24" onSubmit={sendMessage}>
+        <form ref={formRef} className="flex flex-col items-center w-full space-y-3 md:space-y-4 mb-12 lg:mb-24" onSubmit={sendMessage}>
           <div className="w-full flex flex-col md:flex-row gap-4">
             <ReusableInputs
               id={id}
@@ -59,7 +144,8 @@ const Contact: React.FC = () => {
               value={inputs.firstName}
               placeholder="Enter your First Name"
               validationErrors={validationErrors}
-              handleChange={handleChange}
+              onBlur={validateNameFields}
+              handleChange={handleChangeName}
             />
             <ReusableInputs
               id={id}
@@ -69,7 +155,8 @@ const Contact: React.FC = () => {
               value={inputs.lastName}
               placeholder="Enter your Last Name"
               validationErrors={validationErrors}
-              handleChange={handleChange}
+              onBlur={validateNameFields}
+              handleChange={handleChangeName}
             />
           </div>
           <ReusableInputs
@@ -80,7 +167,8 @@ const Contact: React.FC = () => {
             value={inputs.email}
             placeholder="Enter your Email"
             validationErrors={validationErrors}
-            handleChange={handleChange}
+            onBlur={validateEmailField}
+            handleChange={handleChangeEmail}
           />
           <ReusableTextArea
             id={id}
@@ -91,14 +179,15 @@ const Contact: React.FC = () => {
             maxLength={1000}
             placeholder={"Type your message here..."}
             validationErrors={validationErrors}
-            handleChange={handleChange}
+            onBlur={validateNameFields}
+            handleChange={handleChangeTextArea}
           />
           <button
             type="submit"
             className={`w-full md:w-1/2 py-4 flex items-center justify-center gap-2 rounded-full text-2xl md:text-4xl font-bold 
-              bg-primary-default text-text-light dark:text-text-light ${isFetching || isAnyError ? `cursor-not-allowed 
-                bg-accent-second text-primary` : '' }`}
-            disabled={isFetching || isAnyError}
+              bg-primary-default text-text-light dark:text-text-light ${isFetching ? `cursor-not-allowed 
+                text-text-light dark:text-text-dark` : '' }`}
+            disabled={isFetching}
           >
             {isFetching && (
               <div className="loading-spinner mr-2">

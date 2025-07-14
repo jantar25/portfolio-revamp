@@ -23,8 +23,12 @@ export default {
     colors: {
       primary: {
         default: '#FDC401',
-        light: '#3B82F6',
-        dark: '#1E3A8A',
+        error: '#DC3C22',
+        success: '#22C55E',
+        warning: '#F59E0B',
+        info: '#3B82F6',
+      },
+      secondary: {
       },
       secondary: {
         DEFAULT: '#F59E0B',
