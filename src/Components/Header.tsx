@@ -71,7 +71,7 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
               {darkMode ? <MdOutlineWbSunny /> : <IoMoonOutline />}
             </button>
             <a
-              href="https://docs.google.com/document/d/1mXQ-S5y_iguZ4-uz6JzCLx9_tMcyCNIxlMS1ZAA1SEg"
+              href="https://docs.google.com/document/d/1goMalPC_P4tBvWby2e71e1nDzOvA3yfr"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1 text-2xl md:text-3xl font-medium text-primary-default"
@@ -138,7 +138,7 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
                   </a>
                 </p>
                 <a
-                  href="https://docs.google.com/document/d/1mXQ-S5y_iguZ4-uz6JzCLx9_tMcyCNIxlMS1ZAA1SEg"
+                  href="https://docs.google.com/document/d/1goMalPC_P4tBvWby2e71e1nDzOvA3yfr"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-1 text-2xl md:text-3xl font-medium text-primary-default"
