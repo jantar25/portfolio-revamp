@@ -5,10 +5,13 @@ import { MdArrowOutward } from "react-icons/md";
 import { dataSkills, languages, frameworksLabraries, tools } from '../constant/dataSkills'
 import { experiences } from '../constant/dataExperiences'
 import { ProjectData } from '../constant/dataWork'
+import { TestimonialData } from '../constant/dataTestimonials'
 import { Slider } from '../Components/Slider'
+import { TestimonialsSlider } from '../Components/TestimonialsSlider';
 import SliderItem from '../Components/SliderItem'
 import ExperienceCard from '../Components/ExperienceCard';
 import ProjectCard from '../Components/ProjectCard'
+import TestimonialCard from '../Components/TestimonialCard';
 import BackgroundAnimation from '../Components/Annimations/BackgroundAnimation'
 import GetConnected from '../Components/GetConnected';
 import meImg from '../assets/images/me.png'
@@ -125,16 +128,28 @@ const location = useLocation();
             <ProjectCard key={project.id} {...project} />
           )}
         </div>
-        <div className="flex items-center justify-center mt-8">
-        </div>
       </div>
       {/* <div className="flex flex-col lg:flex-row items-start justify-between gap-4 mt-24">
         <h2 className="text-4xl md:text-6xl font-medium mb-8">Personal Insights</h2>
-      </div>
-      <div className="flex flex-col lg:flex-row items-start justify-between gap-4 mt-24">
-        <h2 className="
-        text-4xl md:text-6xl font-medium mb-8">Testimonial</h2>
       </div> */}
+      <div className="flex flex-col gap-4 mt-12 md:mt-24">
+        <div className="flex flex-col md:flex-row md:items-center justify-between mb-4 md:mb-8">
+          <h2 className="text-4xl md:text-6xl font-medium mb-4 md:mb-8">Testimonial</h2>
+          <a
+            href="https://www.linkedin.com/in/bulambo-mwendelwa-gloire/details/recommendations/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1 text-sm md:text-xl font-medium hover:text-primary-default"
+          >
+            View All Testimonials
+            <MdArrowOutward />
+          </a>
+        </div>
+        <TestimonialsSlider
+          items={TestimonialData}
+          renderItem={(item) => <TestimonialCard {...item} />}
+        />
+      </div>
       <GetConnected />
     </div>
   )
