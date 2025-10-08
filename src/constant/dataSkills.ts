@@ -4,7 +4,7 @@ export const dataSkills: { name: string; rate: string }[] = [
   { name: 'Cyber Security', rate: '85' },
   { name: 'Augmented and Virtual Reality', rate: '80' },
   { name: 'DevOps/Cloud Computing', rate: '80' },
-  { name: 'Data Science and Analytics', rate: '65' },
+  { name: 'AI & Machine Learning', rate: '90' },
 ]
 
 export const languages: { name: string; icon: string }[] = [
